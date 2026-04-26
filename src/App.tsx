@@ -15,7 +15,10 @@ function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [authView, setAuthView] = useState<'login' | 'register'>('login');
   const [selectedNote, setSelectedNote] = useState<any>(null);
-  const [isProcessingGh, setIsProcessingGh] = useState(false);
+  const [isProcessingGh, setIsProcessingGh] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return !!params.get('code') && !token;
+  });
 
   // Handle GitHub Callback
   React.useEffect(() => {
@@ -23,25 +26,25 @@ function App() {
     const code = urlParams.get('code');
     
     if (code && !token) {
-      console.log("[AUTH] GitHub code detected, exchanging...");
-      setIsProcessingGh(true);
+      console.log("[AUTH] GitHub code detected, starting exchange scene...");
       
-      // Clean up URL
+      // Clean up URL immediately to avoid double-processing
       window.history.replaceState({}, document.title, "/");
       
       authService.githubLogin(undefined, code)
         .then(data => {
+          console.log("[AUTH] GitHub exchange successful");
           login(data.token, data.user);
         })
         .catch(err => {
-          console.error("GitHub Login Error:", err);
-          alert("GitHub login failed. Please try again.");
+          console.error("GitHub Scene Error:", err);
+          alert("GitHub authentication failed. Please try again.");
         })
         .finally(() => {
           setIsProcessingGh(false);
         });
     }
-  }, [token, login]);
+  }, [token, login, isProcessingGh]);
 
   const loading = authLoading || isProcessingGh;
 
