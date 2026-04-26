@@ -1,0 +1,86 @@
+/* Dashboard Specific Styles */
+
+.dashboard-container {
+  animation: fadeIn 0.7s forwards;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.chart-section {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .chart-section {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.main-chart-card {
+  grid-column: span 1;
+}
+
+@media (min-width: 1024px) {
+  .main-chart-card {
+    grid-column: span 2;
+  }
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.h-250 { height: 250px; }
+.h-350 { height: 350px; }
+
+.recent-notes-section {
+  margin-top: 3rem;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .notes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Specific component tweaks */
+.dashboard-card {
+  padding: 2rem;
+}
+
+.activity-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
