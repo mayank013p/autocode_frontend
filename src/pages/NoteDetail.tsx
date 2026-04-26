@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/layout/Header';
-import { ArrowLeft, Clock, Calendar, Tag, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Tag,  } from 'lucide-react';
 import type { NoteData } from './Notes';
 
 interface NoteDetailProps {
