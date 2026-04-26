@@ -6,6 +6,7 @@ import Insights from './pages/Insights';
 import NoteDetail from './pages/NoteDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import type { NoteData } from './pages/Notes';
 import { useAuth } from './context/AuthContext';
 import { Loader2 } from 'lucide-react';
 import { authService } from './services/authService';
@@ -14,7 +15,7 @@ function App() {
   const { token, loading: authLoading, login } = useAuth();
   const [currentView, setCurrentView] = useState('dashboard');
   const [authView, setAuthView] = useState<'login' | 'register'>('login');
-  const [selectedNote, setSelectedNote] = useState<any>(null);
+  const [selectedNote, setSelectedNote] = useState<NoteData | null>(null);
   const [isProcessingGh, setIsProcessingGh] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return !!params.get('code') && !token;
@@ -64,7 +65,7 @@ function App() {
     );
   }
 
-  const handleOpenNote = (note: any) => {
+  const handleOpenNote = (note: NoteData) => {
     setSelectedNote(note);
     setCurrentView('note-detail');
   };
